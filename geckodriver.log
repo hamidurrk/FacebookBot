@@ -1,0 +1,37 @@
+1691095775664	geckodriver	INFO	Listening on 127.0.0.1:14317
+1691095778696	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\hamid\\AppData\\Local\\Temp\\rust_mozprofile2F4N8f"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691095779617	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691095780266	Marionette	INFO	Listening on port 14328
+1691095780367	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3iX3c4/yL/l/en_GB/Kt5c1i5--RI.js?_nc_x=Ij3Wp8lg5Kz, line 23: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.facebook.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.facebook.com."
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3iPho4/yH/l/en_GB/94S6PUs9ji1.js?_nc_x=Ij3Wp8lg5Kz, line 25: unreachable code after return statement
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3iX3c4/yL/l/en_GB/Kt5c1i5--RI.js?_nc_x=Ij3Wp8lg5Kz, line 23: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3iBvu4/yI/l/makehaste_jhash/ORI1DkVmEbr.js?_nc_x=wqZunOna9am&_nc_eui2=AeGhKjsdSzjUiaqjB8qjlWnzjxspA3DDsVWPGykDcMOxVUf4zcMtI3V2S-iYXgKWVjHxTtZca6jfRnrC8XP0Vzef, line 161: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1691095862690	Marionette	INFO	Stopped listening on port 14328
+Dynamically enable window occlusion 1
+1691095866275	geckodriver	INFO	Listening on 127.0.0.1:14464
+1691095869322	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\hamid\\AppData\\Local\\Temp\\rust_mozprofiletM52xC"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691095869791	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691095870280	Marionette	INFO	Listening on port 14476
+1691095870333	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3iX3c4/yL/l/en_GB/Kt5c1i5--RI.js?_nc_x=Ij3Wp8lg5Kz, line 23: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.facebook.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.facebook.com."
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3iPho4/yH/l/en_GB/94S6PUs9ji1.js?_nc_x=Ij3Wp8lg5Kz, line 25: unreachable code after return statement
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3iX3c4/yL/l/en_GB/Kt5c1i5--RI.js?_nc_x=Ij3Wp8lg5Kz, line 23: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3iBvu4/yI/l/makehaste_jhash/ORI1DkVmEbr.js?_nc_x=wqZunOna9am&_nc_eui2=AeGhKjsdSzjUiaqjB8qjlWnzjxspA3DDsVWPGykDcMOxVUf4zcMtI3V2S-iYXgKWVjHxTtZca6jfRnrC8XP0Vzef, line 161: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1691096336102	Marionette	INFO	Stopped listening on port 14476
+Dynamically enable window occlusion 1
+1691096375867	geckodriver	INFO	Listening on 127.0.0.1:1065
+1691096402606	geckodriver	INFO	Listening on 127.0.0.1:1142
+1691096618695	geckodriver	INFO	Listening on 127.0.0.1:1405
+1691096659367	geckodriver	INFO	Listening on 127.0.0.1:1450
+1691097094507	geckodriver	INFO	Listening on 127.0.0.1:1852
