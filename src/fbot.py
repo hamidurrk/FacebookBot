@@ -157,4 +157,4 @@ time.sleep(100)
 fb = FacebookBot('hamidur.rk', password)
 
 # fb.login()
-fb.crawl(20)
+fb.crawl(15)
