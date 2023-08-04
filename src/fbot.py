@@ -2,7 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.common.action_chains import ActionChains
-import time, re, json
+from tqdm import tqdm
+import time, re, json, sys
 
 options = FirefoxOptions()
 #options.add_argument("--headless")
@@ -19,6 +20,22 @@ def gen_prompt(message, value = 70, char="-"):
     wrt = " " + message + " "
     print(wrt.center(value, char))
     print("\n")
+
+def wait(duration):
+    num_iterations = 100
+    time_interval = (duration-1) / num_iterations
+
+    with tqdm(total=num_iterations, desc="Loading", unit="iteration", ncols=100) as pbar:
+        for _ in range(num_iterations):
+            time.sleep(time_interval)
+            pbar.update(1)
+    print("\n")
+
+def loading(i, total):
+    progress = (i / total) * 100
+    sys.stdout.write('\r')
+    sys.stdout.write("Scrolling: | %-50s | %0.2f%%" % ('█' * int(progress/2), progress))
+    sys.stdout.flush()
 
 class FacebookBot:
     def __init__(self, username, password):
@@ -43,7 +60,7 @@ class FacebookBot:
         time.sleep(1)
         
         bot.find_element_by_xpath('//*[@id="pass"]').send_keys(Keys.RETURN)
-        time.sleep(5)
+        wait(5)
         gen_prompt("Login Requested")
         print("\n"*4)
 
@@ -51,7 +68,7 @@ class FacebookBot:
         bot = self.bot
 
         bot.get('https://www.facebook.com/' + self.username)
-        time.sleep(4)
+        wait(4)
         gen_prompt("Navigated to " + self.username, char="#")
         
         bot.find_element_by_id("facebook").click()
@@ -80,23 +97,25 @@ class FacebookBot:
                     bot.find_element_by_xpath(react_bar_str).click()
                     time.sleep(2)
 
-                    react_box = "/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/div/div/div/div[2]/div[2]/div[3]/div"
                     x = []
                     obj = bot.find_elements_by_xpath("//div[@class='x1rg5ohu']")
-                    if (reacts >= 10):
+                    if (reacts >= 1):
                         countList = []
                         while True:
                             obj = bot.find_elements_by_xpath("//div[@class='x1rg5ohu']")
                             for elements in obj:
                                 x.append(elements.text)
+                            react_box = "/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/div/div/div/div[2]/div[2]/div[3]/div"
                             scroll_element = bot.find_element_by_xpath(react_box)
                             bot.execute_script(f"arguments[0].scrollTop += {200};", scroll_element)
                             time.sleep(0.5)
                             count = len(x)
+                            loading(count, reacts)
                             countList.append(count)
                             counter = countList.count(count)
 
                             if ((len(x) == reacts) or counter >= 8):
+                                print("\n")
                                 break
                             x.clear()
 
@@ -132,9 +151,10 @@ class FacebookBot:
         print(f"Size of database: {len(memory_list)}")
         print("\n"*4)
 
-
-
-fb = FacebookBot('hamidur.rk', 'WhyS0SEr10us?')
+with open("C:\\Users\\hamid\\OneDrive\\Documents\\credential.txt", 'r', encoding='utf-8') as f:
+    password = f.read()
+time.sleep(100)
+fb = FacebookBot('hamidur.rk', password)
 
 # fb.login()
-fb.crawl(10)
+fb.crawl(20)
