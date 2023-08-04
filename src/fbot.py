@@ -115,6 +115,7 @@ class FacebookBot:
                             counter = countList.count(count)
 
                             if ((len(x) == reacts) or counter >= 8):
+                                loading(1, 1)
                                 print("\n")
                                 break
                             x.clear()
@@ -153,8 +154,8 @@ class FacebookBot:
 
 with open("C:\\Users\\hamid\\OneDrive\\Documents\\credential.txt", 'r', encoding='utf-8') as f:
     password = f.read()
-time.sleep(100)
+
 fb = FacebookBot('hamidur.rk', password)
 
 # fb.login()
-fb.crawl(15)
+fb.crawl(20)
