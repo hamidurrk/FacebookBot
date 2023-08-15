@@ -43,10 +43,20 @@ class FacebookBot:
         self.password = password
         self.bot = webdriver.Firefox(executable_path='/Users/hamid/Downloads/Programs/geckodriver.exe', service_args = ['--marionette-port', '2828', '--connect-existing'])
         self.bot.set_window_position(0, 0) 
-        self.bot.set_window_size(960, 1080)
+        self.bot.set_window_size(960, 1043)
         gen_prompt("Bot initialized", char="#")
         print("\n")
     
+    def highlight_element(self, element, delay=1):
+        bot = self.bot
+        unfriend_button_element = bot.find_element_by_xpath(element)
+        highlight_script = "arguments[0].style.backgroundColor = 'yellow';"
+        bot.execute_script(highlight_script, unfriend_button_element)
+
+        time.sleep(delay)  
+        remove_highlight_script = "arguments[0].style.backgroundColor = '';"
+        bot.execute_script(remove_highlight_script, unfriend_button_element)
+
     def login(self):
         bot = self.bot
         bot.get("https://www.facebook.com/")
@@ -76,7 +86,10 @@ class FacebookBot:
             memory_list = json.loads(f.read())
         print(f"{len(memory_list)} people already exists in the database.")
         gen_prompt("Starting the search for new people",value=100, char="#")
-
+        c = ActionChains(bot)
+        for _ in range(2):
+            c.send_keys(Keys.PAGE_DOWN).perform()
+            time.sleep(0.5)
         total_new = 0
         for i in range(number_of_posts):
             i += 1
@@ -85,7 +98,7 @@ class FacebookBot:
             time.sleep(0.5)
             wrt = "Post no: " + str(i) + " "
             print(wrt.center(70, "-"))
-            react_bar_str = f"/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div[3]/div[2]/div[{i+1}]/div/div/div/div/div/div/div/div/div/div/div[8]/div/div/div[4]/div/div/div[1]/div/div[1]/div/div[1]/div/span/div/span[2]/span/span"
+            react_bar_str = f"/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div[3]/div[2]/div[{i+2}]/div/div/div/div/div/div/div/div/div/div/div[8]/div/div/div[4]/div/div/div[1]/div/div[1]/div/div[1]/div/span/div/span[2]/span/span"
             info = bot.find_element_by_xpath(react_bar_str).text
             time.sleep(1.5)
             
@@ -152,10 +165,53 @@ class FacebookBot:
         print(f"Size of database: {len(memory_list)}")
         print("\n"*4)
 
+    def clean(self, txt_file=None):
+        bot = self.bot
+
+        bot.get('https://www.facebook.com/' + self.username + '/friends')
+        wait(4)
+
+        bot.find_element_by_id("facebook").click()
+        c = ActionChains(bot)
+        c.send_keys(Keys.PAGE_DOWN).perform()
+        time.sleep(1)
+ 
+        for i in range(1, 20):
+            name_text_str = f"/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div/div/div/div/div/div/div/div/div[3]/div[{i}]/div[2]/div[1]/a/span"
+            three_dot_button = f"/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div/div/div/div/div/div/div/div/div[3]/div[{i}]/div[3]/div/div/div"
+            unfriend_button = f"/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[2]/div/div/div[1]/div[1]/div/div/div/div/div/div/div[1]/div/div[4]"
+            anchor_scroll = f"/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div/div/div/div/div/div/div/div/div[3]/div[{i-4}]/div[2]/div[1]/a/span"
+            clickable = "/html/body/div[1]/div/div[1]/div/div[2]/div[3]/div/div"
+            try:    
+                if(i >= 5):
+                    anchor_scroll_element = bot.find_element_by_xpath(anchor_scroll)
+                    bot.execute_script("arguments[0].scrollIntoView();", anchor_scroll_element)
+                    time.sleep(1)
+                
+                friend = bot.find_element_by_xpath(name_text_str).text
+                print(friend)
+            
+                bot.find_element_by_xpath(three_dot_button).click()
+                time.sleep(1)
+
+                self.highlight_element(unfriend_button)
+                bot.find_element_by_xpath(clickable).click()
+            except Exception as e:
+                    print("An error occurred: Cannot process deactivated/non-English-name profile")
+                    pass
+
+
+
+
+
+
+
+
 with open("C:\\Users\\hamid\\OneDrive\\Documents\\credential.txt", 'r', encoding='utf-8') as f:
     password = f.read()
 
 fb = FacebookBot('hamidur.rk', password)
 
 # fb.login()
-fb.crawl(20)
+# fb.crawl(20)
+fb.clean()
