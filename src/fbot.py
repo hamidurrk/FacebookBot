@@ -47,10 +47,10 @@ class FacebookBot:
         gen_prompt("Bot initialized", char="#")
         print("\n")
     
-    def highlight_element(self, element, delay=1):
+    def highlight_element(self, element, color='yellow', delay=0.1):
         bot = self.bot
         unfriend_button_element = bot.find_element_by_xpath(element)
-        highlight_script = "arguments[0].style.backgroundColor = 'yellow';"
+        highlight_script = f"arguments[0].style.backgroundColor = '{color}';"
         bot.execute_script(highlight_script, unfriend_button_element)
 
         time.sleep(delay)  
@@ -74,7 +74,7 @@ class FacebookBot:
         gen_prompt("Login Requested")
         print("\n"*4)
 
-    def crawl(self, number_of_posts):
+    def crawl_timeline(self, number_of_posts):
         bot = self.bot
 
         bot.get('https://www.facebook.com/' + self.username)
@@ -165,16 +165,59 @@ class FacebookBot:
         print(f"Size of database: {len(memory_list)}")
         print("\n"*4)
 
+    def crawl_activity(self, number_of_activities):
+        bot = self.bot
+
+        activity_link = f"https://www.facebook.com/{self.username}/allactivity?activity_history=false&category_key=LIKEDPOSTS&manage_mode=false&should_load_landing_page=false"
+        bot.get(activity_link)
+        wait(4)
+        gen_prompt("Navigated to " + self.username + "'s Activities", char="#")
+        gen_prompt(f"Gathering past {number_of_activities} activities")
+
+        i = 2
+        j = 4
+        k = 0
+        counter = 0
+        while(counter < number_of_activities):
+            counter += 1
+            try: 
+                strong2_text = f"/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div[2]/div/div/div/div/div/div[{j}]/div[{i}]/div[2]/div[1]/div/a/div[1]/div[2]/div/div/div/div[1]/span/span/span/div/strong[2]"
+                anchor_scroll = f"/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div[2]/div/div/div/div/div/div[{j}]/div[{i-2}]/div[2]/div[1]/div/a/div[1]/div[2]/div/div/div/div[1]/span/span/span/div/strong[2]"
+                if(i%4 == 0 and i > 1):
+                    anchor_scroll_element = bot.find_element_by_xpath(anchor_scroll)
+                    bot.execute_script("arguments[0].scrollIntoView();", anchor_scroll_element)
+                    time.sleep(2)
+                
+                reacted_to = bot.find_element_by_xpath(strong2_text).text
+                self.highlight_element(strong2_text)
+                print(reacted_to)
+                
+                i += 1
+                k = 0
+            except Exception as e:
+                i += 1
+                k += 1
+                print("An error occurred: " + str(e))
+                if (k >= 5):
+                    i = 2
+                    j += 1
+                    k = 0
+                pass
+
     def clean(self, txt_file=None):
         bot = self.bot
 
         bot.get('https://www.facebook.com/' + self.username + '/friends')
         wait(4)
+        gen_prompt("Navigated to " + self.username + "'s Friendlist", char="#")
 
         bot.find_element_by_id("facebook").click()
         c = ActionChains(bot)
         c.send_keys(Keys.PAGE_DOWN).perform()
         time.sleep(1)
+
+        with open(txt_file, 'r', encoding='utf-8') as f:
+            memory_list = json.loads(f.read())
  
         for i in range(1, 20):
             name_text_str = f"/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div/div/div/div/div/div/div/div/div[3]/div[{i}]/div[2]/div[1]/a/span"
@@ -183,29 +226,26 @@ class FacebookBot:
             anchor_scroll = f"/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div/div/div/div/div/div/div/div/div[3]/div[{i-4}]/div[2]/div[1]/a/span"
             clickable = "/html/body/div[1]/div/div[1]/div/div[2]/div[3]/div/div"
             try:    
-                if(i >= 5):
+                if(i%5 == 0 and i > 1):
                     anchor_scroll_element = bot.find_element_by_xpath(anchor_scroll)
                     bot.execute_script("arguments[0].scrollIntoView();", anchor_scroll_element)
-                    time.sleep(1)
+                    time.sleep(0.5)
                 
                 friend = bot.find_element_by_xpath(name_text_str).text
+                self.highlight_element(name_text_str)
                 print(friend)
-            
-                bot.find_element_by_xpath(three_dot_button).click()
-                time.sleep(1)
 
-                self.highlight_element(unfriend_button)
-                bot.find_element_by_xpath(clickable).click()
-            except Exception as e:
-                    print("An error occurred: Cannot process deactivated/non-English-name profile")
+                if(friend in memory_list):
                     pass
+                else:
+                    bot.find_element_by_xpath(three_dot_button).click()
+                    time.sleep(1)
 
-
-
-
-
-
-
+                    self.highlight_element(unfriend_button)
+                    bot.find_element_by_xpath(clickable).click()
+            except Exception as e:
+                    print("An error occurred: Cannot process 'Deactivated'/ 'Non-English-Name' profile")
+                    pass
 
 with open("C:\\Users\\hamid\\OneDrive\\Documents\\credential.txt", 'r', encoding='utf-8') as f:
     password = f.read()
@@ -213,5 +253,6 @@ with open("C:\\Users\\hamid\\OneDrive\\Documents\\credential.txt", 'r', encoding
 fb = FacebookBot('hamidur.rk', password)
 
 # fb.login()
-# fb.crawl(20)
-fb.clean()
+# fb.crawl_timeline(20)
+fb.crawl_activity(300)
+# fb.clean("friends.txt")
