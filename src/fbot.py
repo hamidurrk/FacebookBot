@@ -174,10 +174,13 @@ class FacebookBot:
         gen_prompt("Navigated to " + self.username + "'s Activities", char="#")
         gen_prompt(f"Gathering past {number_of_activities} activities")
 
+        with open("friends.txt", 'r', encoding='utf-8') as f:
+            memory_list = json.loads(f.read())
         i = 2
         j = 4
         k = 0
         counter = 0
+        id_list = []
         while(counter < number_of_activities):
             counter += 1
             try: 
@@ -191,18 +194,25 @@ class FacebookBot:
                 reacted_to = bot.find_element_by_xpath(strong2_text).text
                 self.highlight_element(strong2_text)
                 print(reacted_to)
+                id_list.append(reacted_to)
                 
                 i += 1
                 k = 0
             except Exception as e:
                 i += 1
                 k += 1
-                print("An error occurred: " + str(e))
+                # print("An error occurred: " + str(e))
                 if (k >= 5):
                     i = 2
                     j += 1
                     k = 0
                 pass
+        joint_list = memory_list + id_list
+        main_list = list(dict.fromkeys(joint_list))
+        new = len(main_list) - len(memory_list)
+        print("\n" + "New added: " + str(new))
+        with open("friends+activities.txt", 'w', encoding='utf-8') as f:
+            f.write(json.dumps(main_list))
 
     def clean(self, txt_file=None):
         bot = self.bot
