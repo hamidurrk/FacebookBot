@@ -89,17 +89,23 @@ class FacebookBot:
         c = ActionChains(bot)
         for _ in range(2):
             c.send_keys(Keys.PAGE_DOWN).perform()
-            time.sleep(0.5)
+            time.sleep(2)
         total_new = 0
         for i in range(number_of_posts):
             i += 1
-            c = ActionChains(bot)
-            c.send_keys(Keys.PAGE_DOWN).perform()
-            time.sleep(0.5)
+            # c = ActionChains(bot)
+            # c.send_keys(Keys.PAGE_DOWN).perform()
+            # time.sleep(0.5)
             wrt = "Post no: " + str(i) + " "
             print(wrt.center(70, "-"))
-            react_bar_str = f"/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div[3]/div[2]/div[{i+2}]/div/div/div/div/div/div/div/div/div/div/div[8]/div/div/div[4]/div/div/div[1]/div/div[1]/div/div[1]/div/span/div/span[2]/span/span"
+            react_bar_str = f"/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div[3]/div[2]/div[{i+3}]/div/div/div/div/div/div/div/div/div/div/div[8]/div/div/div[4]/div/div/div[1]/div/div[1]/div/div[1]/div/span/div/span[2]/span/span"
+            anchor_scroll = f"/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div[3]/div[2]/div[{i+1}]/div/div/div/div/div/div/div/div/div/div/div[8]/div/div/div[4]/div/div/div[1]/div/div[1]/div/div[1]/div/span/div/span[2]/span/span"
+            if(i > 2):
+                anchor_scroll_element = bot.find_element_by_xpath(anchor_scroll)
+                bot.execute_script("arguments[0].scrollIntoView();", anchor_scroll_element)
+                time.sleep(1)
             info = bot.find_element_by_xpath(react_bar_str).text
+            self.highlight_element(react_bar_str, delay=0.5)
             time.sleep(1.5)
             
             reacts = int_from_string(info) + 2
@@ -263,6 +269,6 @@ with open("C:\\Users\\hamid\\OneDrive\\Documents\\credential.txt", 'r', encoding
 fb = FacebookBot('hamidur.rk', password)
 
 # fb.login()
-# fb.crawl_timeline(20)
-fb.crawl_activity(300)
+fb.crawl_timeline(20)
+# fb.crawl_activity(300)
 # fb.clean("friends.txt")
