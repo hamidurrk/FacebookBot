@@ -145,3 +145,48 @@ Dynamically enable window occlusion 1
 1692072741574	geckodriver	INFO	Listening on 127.0.0.1:14425
 1692072853211	geckodriver	INFO	Listening on 127.0.0.1:14469
 1692072954421	geckodriver	INFO	Listening on 127.0.0.1:14502
+1692697842737	geckodriver	INFO	Listening on 127.0.0.1:9235
+1692698223590	geckodriver	INFO	Listening on 127.0.0.1:9612
+1692698827059	geckodriver	INFO	Listening on 127.0.0.1:10259
+1692698830132	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\hamid\\AppData\\Local\\Temp\\rust_mozprofile2CzY07"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1692698831465	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1692698832227	Marionette	INFO	Listening on port 10269
+1692698832330	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3iX3c4/yq/l/en_GB/b8ec0bLue8l.js?_nc_x=Ij3Wp8lg5Kz, line 24: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.facebook.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.facebook.com."
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3iPho4/y-/l/en_GB/ER-7RU6SMhF.js?_nc_x=Ij3Wp8lg5Kz, line 25: unreachable code after return statement
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3iX3c4/yq/l/en_GB/b8ec0bLue8l.js?_nc_x=Ij3Wp8lg5Kz, line 24: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3i6S44/yX/l/makehaste_jhash/SDXfojc9yzo.js?_nc_x=wqZunOna9am&_nc_eui2=AeGOzDHBB8oOnofCWluMMyvyjwxzUoNdYkOPDHNSg11iQ0GJYaGDpzc0uI8nXQnKyeMuIwDzjGMYpJ9Iu-SPfnzr, line 183: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1692698929219	Marionette	INFO	Stopped listening on port 10269
+Dynamically enable window occlusion 1
+1692699694262	geckodriver	INFO	Listening on 127.0.0.1:11139
+1692699697335	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\hamid\\AppData\\Local\\Temp\\rust_mozprofileYIREIU"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1692699697744	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1692699698267	Marionette	INFO	Listening on port 11149
+1692699698745	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1692721933224	geckodriver	INFO	Listening on 127.0.0.1:3497
+1692721936330	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\hamid\\AppData\\Local\\Temp\\rust_mozprofileVoRnfJ"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1692721936816	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1692721937313	Marionette	INFO	Listening on port 3507
+1692721937388	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3iX3c4/yq/l/en_GB/b8ec0bLue8l.js?_nc_x=Ij3Wp8lg5Kz, line 24: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.facebook.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.facebook.com."
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3iPho4/y-/l/en_GB/ER-7RU6SMhF.js?_nc_x=Ij3Wp8lg5Kz, line 25: unreachable code after return statement
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3iX3c4/yq/l/en_GB/b8ec0bLue8l.js?_nc_x=Ij3Wp8lg5Kz, line 24: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3i6S44/yX/l/makehaste_jhash/SDXfojc9yzo.js?_nc_x=wqZunOna9am&_nc_eui2=AeGOzDHBB8oOnofCWluMMyvyjwxzUoNdYkOPDHNSg11iQ0GJYaGDpzc0uI8nXQnKyeMuIwDzjGMYpJ9Iu-SPfnzr, line 183: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3iP7Y4/yB/l/makehaste_jhash/vx_2kHwxM3cIuJ6sXucc_KFTAiBMA2dxER86suNK-CT2z_EFAOlJT6uPLMCa1gvP-3VB4F86F0xZMgmdRGnRpVEBFd25k3Xc8GvoIkFxbjQQezQm8yrKy-nxY5PyqgFyQ52rLtIx62IIpdnZQllFv7EHElbMvvvl5bCTL05zAa02ItRj.js?_nc_x=wqZunOna9am&_nc_eui2=AeFpzuj74dKcpxb9xy_73IcwFwkh0D5vX3AXCSHQPm9fcFf57GgYEQGoTv7BkUMbpX1hj66hLRhC0S0TKKK76ps-, line 778: Error: Minified React error #418; visit https://reactjs.org/docs/error-decoder.html?invariant=418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3iP7Y4/yB/l/makehaste_jhash/vx_2kHwxM3cIuJ6sXucc_KFTAiBMA2dxER86suNK-CT2z_EFAOlJT6uPLMCa1gvP-3VB4F86F0xZMgmdRGnRpVEBFd25k3Xc8GvoIkFxbjQQezQm8yrKy-nxY5PyqgFyQ52rLtIx62IIpdnZQllFv7EHElbMvvvl5bCTL05zAa02ItRj.js?_nc_x=wqZunOna9am&_nc_eui2=AeFpzuj74dKcpxb9xy_73IcwFwkh0D5vX3AXCSHQPm9fcFf57GgYEQGoTv7BkUMbpX1hj66hLRhC0S0TKKK76ps-, line 778: Error: Minified React error #422; visit https://reactjs.org/docs/error-decoder.html?invariant=422 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+1692722156314	Marionette	INFO	Stopped listening on port 3507
+Dynamically enable window occlusion 1
+1692722761169	geckodriver	INFO	Listening on 127.0.0.1:4325

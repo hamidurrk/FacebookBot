@@ -38,10 +38,13 @@ def loading(i, total):
     sys.stdout.flush()
 
 class FacebookBot:
-    def __init__(self, username, password):
+    def __init__(self, username, password, browser_type=0):
         self.username = username
         self.password = password
-        self.bot = webdriver.Firefox(executable_path='/Users/hamid/Downloads/Programs/geckodriver.exe', service_args = ['--marionette-port', '2828', '--connect-existing'])
+        if (browser_type):
+            self.bot = webdriver.Firefox(executable_path='/Users/hamid/Downloads/Programs/geckodriver.exe', service_args = ['--marionette-port', '2828', '--connect-existing'])
+        else:
+            self.bot = webdriver.Firefox(executable_path='/Users/hamid/Downloads/Programs/geckodriver.exe', options=options)
         self.bot.set_window_position(0, 0) 
         self.bot.set_window_size(960, 1043)
         gen_prompt("Bot initialized", char="#")
@@ -62,17 +65,20 @@ class FacebookBot:
         bot.get("https://www.facebook.com/")
         time.sleep(1)
         gen_prompt("Navigated to Facebook", char="#")
-
-        bot.find_element_by_xpath('//*[@id="email"]').send_keys(self.username)
-        gen_prompt("Username Entered")
-        bot.find_element_by_xpath('//*[@id="pass"]').send_keys(self.password)
-        gen_prompt("Password Entered")
-        time.sleep(1)
-        
-        bot.find_element_by_xpath('//*[@id="pass"]').send_keys(Keys.RETURN)
-        wait(5)
-        gen_prompt("Login Requested")
-        print("\n"*4)
+        try:
+            bot.find_element_by_xpath('//*[@id="email"]').send_keys(self.username)
+            gen_prompt("Username Entered")
+            bot.find_element_by_xpath('//*[@id="pass"]').send_keys(self.password)
+            gen_prompt("Password Entered")
+            time.sleep(1)
+            
+            bot.find_element_by_xpath('//*[@id="pass"]').send_keys(Keys.RETURN)
+            gen_prompt("Login Requested")
+            wait(5)
+            
+            print("\n"*4)
+        except:
+            pass
 
     def crawl_timeline(self, number_of_posts):
         bot = self.bot
@@ -266,9 +272,9 @@ class FacebookBot:
 with open("C:\\Users\\hamid\\OneDrive\\Documents\\credential.txt", 'r', encoding='utf-8') as f:
     password = f.read()
 
-fb = FacebookBot('hamidur.rk', password)
+# fb = FacebookBot('hamidur.rk', password)
 
 # fb.login()
-fb.crawl_timeline(20)
+# fb.crawl_timeline(20)
 # fb.crawl_activity(300)
 # fb.clean("friends.txt")
