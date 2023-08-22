@@ -190,3 +190,4 @@ JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3iP7Y4/yB/l/makehaste_jh
 1692722156314	Marionette	INFO	Stopped listening on port 3507
 Dynamically enable window occlusion 1
 1692722761169	geckodriver	INFO	Listening on 127.0.0.1:4325
+1692722946691	geckodriver	INFO	Listening on 127.0.0.1:4523
