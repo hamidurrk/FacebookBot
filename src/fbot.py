@@ -272,7 +272,7 @@ class FacebookBot:
 with open("C:\\Users\\hamid\\OneDrive\\Documents\\credential.txt", 'r', encoding='utf-8') as f:
     password = f.read()
 
-# fb = FacebookBot('hamidur.rk', password)
+# fb = FacebookBot('hamidur.rk', password, browser_type=1)
 
 # fb.login()
 # fb.crawl_timeline(20)

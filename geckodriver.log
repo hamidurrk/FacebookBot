@@ -191,3 +191,7 @@ JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3iP7Y4/yB/l/makehaste_jh
 Dynamically enable window occlusion 1
 1692722761169	geckodriver	INFO	Listening on 127.0.0.1:4325
 1692722946691	geckodriver	INFO	Listening on 127.0.0.1:4523
+1692755022816	geckodriver	INFO	Listening on 127.0.0.1:9358
+1692755076844	geckodriver	INFO	Listening on 127.0.0.1:9432
+1692755109496	geckodriver	INFO	Listening on 127.0.0.1:9495
+1692755242058	geckodriver	INFO	Listening on 127.0.0.1:9627

@@ -6,34 +6,18 @@ import sys
 import subprocess
 import threading 
 
-class Redirect():
+class TextRedirector:
+    def __init__(self, text_widget):
+        self.text_widget = text_widget
 
-    def __init__(self, widget, autoscroll=True):
-        self.widget = widget
-        self.autoscroll = autoscroll
-
-    def write(self, text):
-        self.widget.insert('end', text)
-        if self.autoscroll:
-            self.widget.see("end")  # autoscroll
-def run():
-    threading.Thread(target=test).start()
-
-def test():
-    print("Thread: start")
-
-    p = subprocess.Popen("ping -c 4 stackoverflow.com".split(), stdout=subprocess.PIPE, bufsize=1, text=True)
-    while p.poll() is None:
-        msg = p.stdout.readline().strip() # read a line from the process output
-        if msg:
-            print(msg)
-
-    print("Thread: end")
+    def write(self, message):
+        self.text_widget.insert("end", message)
+        self.text_widget.see("end")
 
 class Home(customtkinter.CTkToplevel):
-    def __init__(self, bot):
+    def __init__(self, bot=1):
         super().__init__()
-
+        self.bot = bot
         customtkinter.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
         customtkinter.set_default_color_theme("dark-blue")  # Themes: "blue" (standard), "green", "dark-blue"
         # configure window
@@ -53,7 +37,7 @@ class Home(customtkinter.CTkToplevel):
         self.logo_label.grid(row=0, column=0, padx=20, pady=(20, 10))
         self.sidebar_button_1 = customtkinter.CTkButton(self.sidebar_frame, command=self.show_time_textbox, text="Update time")
         self.sidebar_button_1.grid(row=1, column=0, padx=20, pady=10)
-        self.sidebar_button_2 = customtkinter.CTkButton(self.sidebar_frame, command=self.sidebar_button_event)
+        self.sidebar_button_2 = customtkinter.CTkButton(self.sidebar_frame, command=self.crawl_timeline_command, text="Crawl Timeline")
         self.sidebar_button_2.grid(row=2, column=0, padx=20, pady=10)
         self.sidebar_button_3 = customtkinter.CTkButton(self.sidebar_frame, command=self.sidebar_button_event)
         self.sidebar_button_3.grid(row=3, column=0, padx=20, pady=10)
@@ -78,6 +62,7 @@ class Home(customtkinter.CTkToplevel):
         # create textbox
         self.textbox = customtkinter.CTkTextbox(self, width=250)
         self.textbox.grid(row=0, column=1, padx=(20, 0), pady=(20, 0), sticky="nsew")
+        sys.stdout = TextRedirector(self.textbox)
 
         # create tabview
         self.tabview = customtkinter.CTkTabview(self, width=250)
@@ -179,7 +164,7 @@ class Home(customtkinter.CTkToplevel):
     def show_time_textbox(self):
         self.textbox.insert("end", time.ctime() + "\n")
         self.textbox.see("end")
-
+       
     def open_input_dialog_event(self):
         dialog = customtkinter.CTkInputDialog(text="Type in a number:", title="CTkInputDialog")
         print("CTkInputDialog:", dialog.get_input())
@@ -194,6 +179,8 @@ class Home(customtkinter.CTkToplevel):
     def sidebar_button_event(self):
         print("sidebar_button click")
 
+    def crawl_timeline_command(self):
+        self.bot.crawl_timeline(20)
 
 if __name__ == "__main__":
     app = Home()
