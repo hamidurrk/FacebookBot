@@ -99,77 +99,93 @@ class FacebookBot:
         total_new = 0
         for i in range(number_of_posts):
             i += 1
-            # c = ActionChains(bot)
-            # c.send_keys(Keys.PAGE_DOWN).perform()
-            # time.sleep(0.5)
             wrt = "Post no: " + str(i) + " "
             print(wrt.center(70, "-"))
-            react_bar_str = f"/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div[3]/div[2]/div[{i+3}]/div/div/div/div/div/div/div/div/div/div/div[8]/div/div/div[4]/div/div/div[1]/div/div[1]/div/div[1]/div/span/div/span[2]/span/span"
-            anchor_scroll = f"/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div[3]/div[2]/div[{i+1}]/div/div/div/div/div/div/div/div/div/div/div[8]/div/div/div[4]/div/div/div[1]/div/div[1]/div/div[1]/div/span/div/span[2]/span/span"
-            if(i > 2):
-                anchor_scroll_element = bot.find_element_by_xpath(anchor_scroll)
-                bot.execute_script("arguments[0].scrollIntoView();", anchor_scroll_element)
-                time.sleep(1)
-            info = bot.find_element_by_xpath(react_bar_str).text
-            self.highlight_element(react_bar_str, delay=0.5)
-            time.sleep(1.5)
-            
-            reacts = int_from_string(info) + 2
-            if (reacts != None):
-                print ("\nReacts: "+ str(reacts))
-                try:
-                    id_list = []
-                    bot.find_element_by_xpath(react_bar_str).click()
-                    time.sleep(2)
-
-                    x = []
-                    obj = bot.find_elements_by_xpath("//div[@class='x1rg5ohu']")
-                    if (reacts >= 1):
-                        countList = []
-                        while True:
-                            obj = bot.find_elements_by_xpath("//div[@class='x1rg5ohu']")
-                            for elements in obj:
-                                x.append(elements.text)
-                            react_box = "/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/div/div/div/div[2]/div[2]/div[3]/div"
-                            scroll_element = bot.find_element_by_xpath(react_box)
-                            bot.execute_script(f"arguments[0].scrollTop += {200};", scroll_element)
-                            time.sleep(0.5)
-                            count = len(x)
-                            loading(count, reacts)
-                            countList.append(count)
-                            counter = countList.count(count)
-
-                            if ((len(x) == reacts) or counter >= 8):
-                                loading(1, 1)
-                                print("\n")
-                                break
-                            x.clear()
-
-                    for elements in obj:
-                        id = elements.text
-                        id_list.append(id)  
-                        print("\t" + id)
-
-                    joint_list = memory_list + id_list
-                    main_list = list(dict.fromkeys(joint_list))
-                    new = len(main_list) - len(memory_list)
-                    print("\n" + "New added: " + str(new))
-                    total_new += new
-                    with open("friends.txt", 'w', encoding='utf-8') as f:
-                        f.write(json.dumps(main_list))
-
-                    with open("friends.txt", 'r', encoding='utf-8') as f:
-                        memory_list = json.loads(f.read())
-
-                    time.sleep(0.5)
-
-                    bot.find_element_by_xpath("//div[@aria-label= 'Close'and @role='button']").click()
-                    time.sleep(0.5)
-
+            try:
+                react_bar_str = f"/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div[3]/div[2]/div[{i+3}]/div/div/div/div/div/div/div/div/div/div/div[8]/div/div/div[4]/div/div/div[1]/div/div[1]/div/div[1]/div/span/div/span[2]/span/span"
+                anchor_scroll = f"/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div[3]/div[2]/div[{i+1}]/div/div/div/div/div/div/div/div/div/div/div[8]/div/div/div[4]/div/div/div[1]/div/div[1]/div/div[1]/div/span/div/span[2]/span/span"
+                if(i > 2):
+                    anchor_scroll_element = bot.find_element_by_xpath(anchor_scroll)
+                    bot.execute_script("arguments[0].scrollIntoView();", anchor_scroll_element)
+                    time.sleep(1)
+                info = bot.find_element_by_xpath(react_bar_str).text
+                self.highlight_element(react_bar_str, delay=0.5)
+                time.sleep(1.5)
                 
-                except Exception as e:
-                    print("An error occurred: ", str(e))
-                    pass
+                reacts = int_from_string(info) + 2
+                if (reacts != None):
+                    print ("\nReacts: "+ str(reacts))
+                    try:
+                        id_list = []
+                        bot.find_element_by_xpath(react_bar_str).click()
+                        time.sleep(2)
+
+                        x = []
+                        obj = bot.find_elements_by_xpath("//div[@class='x1rg5ohu']")
+                        if (reacts >= 1):
+                            countList = []
+                            while True:
+                                obj = bot.find_elements_by_xpath("//div[@class='x1rg5ohu']")
+                                for elements in obj:
+                                    x.append(elements.text)
+                                react_box = "/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/div/div/div/div[2]/div[2]/div[3]/div"
+                                scroll_element = bot.find_element_by_xpath(react_box)
+                                bot.execute_script(f"arguments[0].scrollTop += {200};", scroll_element)
+                                time.sleep(0.5)
+                                count = len(x)
+                                loading(count, reacts)
+                                countList.append(count)
+                                counter = countList.count(count)
+
+                                if ((len(x) == reacts) or counter >= 8):
+                                    loading(1, 1)
+                                    print("\n")
+                                    break
+                                x.clear()
+                        
+                        with open('react_frequency.txt', 'r') as f:
+                            freq_dict = json.load(f)
+                        
+                        for elements in obj:
+                            id = elements.text
+                            freq_dict[id] = freq_dict.get(id, 0) + 1
+                            id_list.append(id)  
+                            print("\t" + id)
+                        
+                        with open('react_frequency.txt', 'w') as f:
+                            json.dump(freq_dict, f)
+                        
+                        joint_list = memory_list + id_list
+                        main_list = list(dict.fromkeys(joint_list))
+                        new = len(main_list) - len(memory_list)
+                        print("\n" + "New added: " + str(new))
+                        total_new += new
+                        with open("friends.txt", 'w', encoding='utf-8') as f:
+                            f.write(json.dumps(main_list))
+
+                        with open("friends.txt", 'r', encoding='utf-8') as f:
+                            memory_list = json.loads(f.read())
+
+                        time.sleep(0.5)
+
+                        bot.find_element_by_xpath("//div[@aria-label= 'Close'and @role='button']").click()
+                        time.sleep(0.5)
+
+                    
+                    except Exception as e:
+                        print("An error occurred: ", str(e))
+                        c = ActionChains(bot)
+                        for _ in range(2):
+                            c.send_keys(Keys.PAGE_DOWN).perform()
+                            time.sleep(2)
+                        pass
+            except Exception as e:
+                print("An error occurred: ", str(e))
+                c = ActionChains(bot)
+                for _ in range(2):
+                    c.send_keys(Keys.PAGE_DOWN).perform()
+                    time.sleep(2)
+                pass
         gen_prompt("Crawl ended", char="#")
         print("\n"*4)
         gen_prompt("Summary")
@@ -272,9 +288,9 @@ class FacebookBot:
 with open("C:\\Users\\hamid\\OneDrive\\Documents\\credential.txt", 'r', encoding='utf-8') as f:
     password = f.read()
 
-# fb = FacebookBot('hamidur.rk', password, browser_type=1)
+fb = FacebookBot('hamidur.rk', password, browser_type=1)
 
 # fb.login()
-# fb.crawl_timeline(20)
+fb.crawl_timeline(15000)
 # fb.crawl_activity(300)
 # fb.clean("friends.txt")
