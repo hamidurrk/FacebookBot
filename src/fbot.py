@@ -181,6 +181,7 @@ class FacebookBot:
                         pass
             except Exception as e:
                 print("An error occurred: ", str(e))
+                print(f"Other people posted: Post of {self.username} could not be found")
                 c = ActionChains(bot)
                 for _ in range(2):
                     c.send_keys(Keys.PAGE_DOWN).perform()
