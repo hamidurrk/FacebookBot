@@ -27,7 +27,7 @@ FacebookBot is a Python-based automation tool designed to interact with Facebook
 
 ## Installation and Usage
 
-*Instructions for setting up and using the bot should be provided here.*
+*Contact me for the instructions for setting up and using the bot should be provided here.*
 
 ## Dependencies
 
@@ -36,5 +36,5 @@ FacebookBot is a Python-based automation tool designed to interact with Facebook
 
 ## Disclaimer
 
-*Include any disclaimer about the use of automation tools on Facebook, adherence to Facebook's terms of service, and potential risks.*
+This tool is intended for educational purposes and personal use only. Users should be aware of Facebook's terms of service regarding automation and use this tool responsibly.
 
